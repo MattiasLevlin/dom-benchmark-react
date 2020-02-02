@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import '../App.css';
 
 class BenchmarkContainer extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         /* const renderedOutput2 = this.props.numberOfDivElements.map((element, i) => {
