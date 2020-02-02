@@ -2,20 +2,10 @@ import React, { Component } from 'react';
 import '../App.css';
 
 class BenchmarkContainer extends Component {
-
     render() {
-        /* const renderedOutput2 = this.props.numberOfDivElements.map((element, i) => {
-            return(
-                <div>
-                    <p>asd</p>
-                </div>
-            )
-        }) */
-
-        const renderedOutput = [...Array(this.props.numberOfDivElements)].map((e, i) =>
-            <div
-                className="benchmark-container"
-                key={i}>div #{i}
+        const renderedOutput = [...Array(this.props.numberOfDivElements)].map(() =>
+            <div>
+                <p>DOM</p>
             </div>
         )
 
