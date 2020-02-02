@@ -1,1 +1,1 @@
-Start: npm start
+Run: npm start
