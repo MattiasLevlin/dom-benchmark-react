@@ -12,7 +12,7 @@ class Benchmark extends Component {
 
     add1000DivElementsToTheDom = () => {
         this.setState({
-            numberOfDivElements: 1000
+            numberOfDivElements: 10000
         })
     }
 
@@ -28,12 +28,12 @@ class Benchmark extends Component {
                 <button
                     onClick={this.add1000DivElementsToTheDom}
                 >
-                    Render 1000 div elements
+                    Add 10,000 div elements
                 </button>
                 <button
                     onClick={this.delete1000DivElementsFromTheDom}
                 >
-                    Delete 1000 div elements
+                    Remove 10,000 div elements
                 </button>
                 <BenchmarkContainer
                     numberOfDivElements={this.state.numberOfDivElements}
