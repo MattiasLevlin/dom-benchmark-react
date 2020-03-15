@@ -2,33 +2,40 @@ import React, { Component } from 'react';
 import '../App.css';
 
 class BenchmarkContainer extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { items: [] };
+      }
+
+    // 1 
+    addDiv() {
+        for (var i = 0; i < 10000; i ++) {
+          this.state.items.push(<div key={i}><p>asd</p></div>)
+        }
+    }
+
+    // 2 
+    editDiv() {
+       // this.state.items.forEach(console.log('asd'))
+    }
+
+    // 3 
+    removeDiv() {
+        this.state.items = []
+    }
+
     render() {
-        let renderedDomOutput = null
-        console.log(this.props.numberOfElements)
+        
         if (this.props.testSelection === 1) {
-            renderedDomOutput = [...Array(this.props.numberOfElements)].map(() =>
-                <div/>
-            )
+            this.addDiv()
         } else if (this.props.testSelection === 2) {
-            renderedDomOutput = [...Array(this.props.numberOfElements)].map(() =>
-                <div>
-                    <p>div</p>
-                </div>
-            )
+            this.editDiv()
         } else if (this.props.testSelection === 3) {
-            renderedDomOutput = [...Array(this.props.numberOfElements)].map(() =>
-                <svg/>
-            )
-        } else if (this.props.testSelection === 4) {
-            renderedDomOutput = [...Array(this.props.numberOfElements)].map(() =>
-                <svg>
-                    <text>svg</text>
-                </svg>
-            )
+            this.removeDiv()
         }
         return (
             <div>
-                {renderedDomOutput}
+                {this.state.items}
             </div>
         );
     }
