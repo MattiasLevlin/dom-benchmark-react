@@ -1,44 +1,73 @@
 import React, { Component } from 'react';
-import BenchmarkContainer from './BenchmarkContainer.jsx';
+import '../App.css';
+
+let operationStartTime = null
+let operationEndTime = null
 
 class Benchmark extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
+            items: [],
             selectedTest: 0,
+        };
+        // this.addDiv = this.addDiv.bind(this);
+    }
+
+    componentDidUpdate() {
+        operationEndTime = performance.now()
+        console.log('Operation took ' + (operationEndTime - operationStartTime) + ' milliseconds')
+    }
+
+    // 1 
+    addDiv() {
+        for (var i = 0; i < 10000; i ++) {
+        this.state.items.push(
+            <div key={i}>
+                <p>
+                    asd
+                </p>
+            </div>
+            )
         }
+        operationStartTime = performance.now()
+        console.log('TEST 1) ADD 10000 DIVS')
+        this.forceUpdate()
     }
 
-    addDivs = () => {
-        this.setState({
-            selectedTest: 1,
-        })   
+    // 2 
+    editOneDiv() {
+     // ...
     }
 
-    editDivs = () => {
+    // 3
+    editAllDiv() {
+        // ...
+    }
+
+    // 4
+    removeOneDiv() {
+        // ...
+    }
+
+    // 5
+    removeAllDiv() {
         this.setState({
-            selectedTest: 2,
+            items: []
         })
-    }
-
-    removeDivs = () => {
-        this.setState({
-            selectedTest: 5,
-        })
+        operationStartTime = performance.now()
+        console.log('TEST 5) REMOVE 10000 DIVS')
     }
 
     render() {
         return (
             <div className="Benchmark">
                 <p>div</p>
-                <button onClick={this.addDivs}>1 addDivs</button>
-                <button onClick={this.editDivs}>2 editDivs</button>
-                <button onClick={this.removeDivs}>5 removeDivs</button>
+                <button onClick={() => this.addDiv()}>1 addDiv</button>
+                <button onClick={() => this.editOneDiv()}>2 editDiv</button>
+                <button onClick={() => this.removeAllDiv()}>5 removeAllDiv</button>
                 <div>
-                    <BenchmarkContainer
-                        testSelection={this.state.selectedTest}
-                    />
+                    {this.state.items}
                 </div>
             </div>
         );
