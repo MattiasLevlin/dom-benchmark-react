@@ -24,7 +24,7 @@ class Benchmark extends Component {
 
     removeDivs = () => {
         this.setState({
-            selectedTest: 3,
+            selectedTest: 5,
         })
     }
 
@@ -34,7 +34,7 @@ class Benchmark extends Component {
                 <p>div</p>
                 <button onClick={this.addDivs}>1 addDivs</button>
                 <button onClick={this.editDivs}>2 editDivs</button>
-                <button onClick={this.removeDivs}>3 removeDivs</button>
+                <button onClick={this.removeDivs}>5 removeDivs</button>
                 <div>
                     <BenchmarkContainer
                         testSelection={this.state.selectedTest}
