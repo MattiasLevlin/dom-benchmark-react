@@ -27,12 +27,22 @@ class BenchmarkContainer extends Component {
     }
 
     // 2 
-    editDiv() {
+    editOneDiv() {
        // this.state.items.forEach(console.log('asd'))
     }
 
-    // 3 
-    removeDiv() {
+    // 3
+    editAllDiv() {
+        // ...
+    }
+
+    // 4
+    removeOneDiv() {
+        // ...
+    }
+
+    // 5
+    removeAllDiv() {
         this.state.items = []
         operationStartTime = performance.now()
         console.log('TEST 5) REMOVE 10000 DIVS')
@@ -43,9 +53,13 @@ class BenchmarkContainer extends Component {
         if (this.props.testSelection === 1) {
             this.addDiv()
         } else if (this.props.testSelection === 2) {
-            this.editDiv()
+            this.editOneDiv()
+        } else if (this.props.testSelection === 3) {
+            this.editAllDiv()
+        } else if (this.props.testSelection === 4) {
+            this.removeOneDiv()
         } else if (this.props.testSelection === 5) {
-            this.removeDiv()
+            this.removeAllDiv()
         }
         return (
             <div>
