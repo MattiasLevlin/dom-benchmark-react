@@ -14,7 +14,6 @@ class Benchmark extends Component {
             divElementsForLoop: [],
             divElementsMap: 0,
             results: [],
-            done: 'Not done',
         };
     }
 
@@ -138,10 +137,6 @@ class Benchmark extends Component {
                 <button onClick={() => this.editAllMap()}>3 Edit all</button>
                 <button onClick={() => this.removeOneMap()}>4 Remove one</button>
                 <button onClick={() => this.removeAllMap()}>5 Remove all</button>
-
-                <div>
-                    {this.state.done}
-                </div>
 
                 <div>
                     {this.state.divElementsForLoop}
