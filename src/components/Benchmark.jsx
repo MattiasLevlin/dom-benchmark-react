@@ -14,6 +14,8 @@ class Benchmark extends Component {
             divElementsForLoop: [],
             divElementsMap: 0,
             results: [],
+            dogsz: 1,
+            randomText: 'asd'
         };
     }
 
@@ -26,7 +28,6 @@ class Benchmark extends Component {
 
     // 1 
     addDiv() {
-        console.log('A) FOR LOOP, TEST 1: ADD 10000 DIVS')
         operationStartTime = performance.now()
         let temporaryArray = []
         for (var i = 0; i < 10000; i ++) {
@@ -47,17 +48,36 @@ class Benchmark extends Component {
 
     // 2 
     editOneDiv() {
-        // ...
+        operationStartTime = performance.now()
+        let newArray = this.state.divElementsForLoop;
+        newArray[0] = Math.random()
+        this.setState({
+            divElementsForLoop: newArray
+        })
     }
 
     // 3
     editAllDiv() {
-        // ...
+        operationStartTime = performance.now()
+        let editTemporaryArray = []
+        for (var i = 0; i < this.state.divElementsForLoop.length; i ++) {
+        editTemporaryArray.push(
+            <div
+                key={i}
+            >
+                <p>
+                    DivEdit { Math.random() }
+                </p>
+            </div>
+            )
+        }
+        this.setState({
+            divElementsForLoop: editTemporaryArray
+        })
     }
 
     // 4
     removeOneDiv() {
-        console.log('A) FOR LOOP, TEST 4: REMOVE ONE DIV')
         operationStartTime = performance.now()
         let newArray = this.state.divElementsForLoop.filter(x => x.key !== this.state.divElementsForLoop.length-1);
         this.setState({
@@ -67,7 +87,6 @@ class Benchmark extends Component {
 
     // 5
     removeAllDiv() {
-        console.log('A) FOR LOOP, TEST 5: REMOVE ALL')
         this.setState({
             divElementsForLoop: []
         })
@@ -78,7 +97,6 @@ class Benchmark extends Component {
 
     // 1
     addMap() {
-        console.log('B) ARRAY MAP, TEST 1: ADD 10000 DIVS')
         operationStartTime = performance.now()
         this.setState({
             divElementsMap: 1000
@@ -87,19 +105,18 @@ class Benchmark extends Component {
 
     // 2
     editOneMap() {
-        // console.log('B) ARRAY MAP, TEST 1: ADD 10000 DIVS')
         operationStartTime = performance.now()
+        this.myRef.current.textContent = Math.random()
         this.setState({
-            divElementsMap: 1000
+            randomText: Math.random()
         })
     }
 
     // 3
     editAllMap() {
-        // console.log('B) ARRAY MAP, TEST 1: ADD 10000 DIVS')
         operationStartTime = performance.now()
         this.setState({
-            divElementsMap: 1000
+            dogsz: Math.random()
         })
     }
 
@@ -114,11 +131,16 @@ class Benchmark extends Component {
 
     // 5
     removeAllMap() {
-        // console.log('B) ARRAY MAP, TEST 5: REMOVE ALL')
         operationStartTime = performance.now()
         this.setState({
             divElementsMap: 0
         })
+    }
+
+    dogs(i) {
+        // console.log(i)
+        // console.log(this.state.dogsz)
+        return this.state.dogsz * i
     }
 
     render() {
@@ -152,12 +174,12 @@ class Benchmark extends Component {
                                     key={i}
                                     ref={this.myRef}
                                 >
-                                    <p>Div {i}
+                                    <p>Div {this.dogs(i)}
                                     </p>
                                 </div>
                         )
                     }
-
+                    <p>{ this.state.randomText }</p>
                 </div>
             </div>
         );
