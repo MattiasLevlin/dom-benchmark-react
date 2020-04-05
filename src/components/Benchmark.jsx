@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../App.css';
-import BenchmarkContainer from './BenchmarkContainer.jsx';
 
 
 let operationStartTime = null
@@ -9,13 +8,14 @@ let operationEndTime = null
 class Benchmark extends Component {
     constructor(props) {
         super(props);
+        this.myRef = React.createRef();
         this.state = {
-            items: [],
             selectedTest: 0,
-            ingredients: [],
-            
+            divElementsForLoop: [],
+            divElementsMap: 0,
+            results: [],
+            done: 'Not done',
         };
-        // this.addDiv = this.addDiv.bind(this);
     }
 
     componentDidUpdate() {
@@ -23,32 +23,32 @@ class Benchmark extends Component {
         console.log('Operation took ' + (operationEndTime - operationStartTime) + ' milliseconds')
     }
 
-    addDivMap() {
-        this.setState({
-            ingredients: 1000
-        })
-        this.forceUpdate()
-    }
+    // A) DATA STRUCTURE: FOR LOOP
 
     // 1 
     addDiv() {
+        console.log('A) FOR LOOP, TEST 1: ADD 10000 DIVS')
+        operationStartTime = performance.now()
+        let temporaryArray = []
         for (var i = 0; i < 10000; i ++) {
-        this.state.items.push(
-            <div key={i}>
+        temporaryArray.push(
+            <div
+                key={i}
+            >
                 <p>
-                    asd
+                    Div {i}
                 </p>
             </div>
             )
         }
-        operationStartTime = performance.now()
-        console.log('TEST 1) ADD 10000 DIVS')
-        this.forceUpdate()
+        this.setState({
+            divElementsForLoop: temporaryArray
+        })
     }
 
     // 2 
     editOneDiv() {
-     // ...
+        // ...
     }
 
     // 3
@@ -58,59 +58,110 @@ class Benchmark extends Component {
 
     // 4
     removeOneDiv() {
-        // ...
+        console.log('A) FOR LOOP, TEST 4: REMOVE ONE DIV')
+        operationStartTime = performance.now()
+        let newArray = this.state.divElementsForLoop.filter(x => x.key != this.state.divElementsForLoop.length-1);
+        // console.log(newArray)
+        this.setState({
+            divElementsForLoop: newArray
+        })
     }
 
     // 5
     removeAllDiv() {
+        console.log('A) FOR LOOP, TEST 5: REMOVE ALL')
         this.setState({
-            items: []
-        })
-        operationStartTime = performance.now()
-        console.log('TEST 5) REMOVE 10000 DIVS')
-    }
-
-
-    // 1  BENCHMARK CONTAINER add all
-    addDivsBenchmarkContainer = () => {
-        this.setState({
-            selectedTest: 1,
+            divElementsForLoop: []
         })
         operationStartTime = performance.now()
     }
 
-    // 5 BENCHMARK CONTAINER remove all
-    removeDivBenchmarkCOntainer = () => {
-        this.setState({
-            selectedTest: 3,
-        })
+    // B) DATA STRUCTURE: ARRAY MAP
+
+    // 1
+    addMap() {
+        console.log('B) ARRAY MAP, TEST 1: ADD 10000 DIVS')
         operationStartTime = performance.now()
+        this.setState({
+            divElementsMap: 1000
+        })
+    }
+
+    // 2
+    editOneMap() {
+        // console.log('B) ARRAY MAP, TEST 1: ADD 10000 DIVS')
+        operationStartTime = performance.now()
+        this.setState({
+            divElementsMap: 1000
+        })
+    }
+
+    // 3
+    editAllMap() {
+        // console.log('B) ARRAY MAP, TEST 1: ADD 10000 DIVS')
+        operationStartTime = performance.now()
+        this.setState({
+            divElementsMap: 1000
+        })
+    }
+
+    // 4
+    removeOneMap() {
+        // console.log(this.myRef)
+        // var node = this.myRef
+        // node.splice()
+    }
+
+    // 5
+    removeAllMap() {
+        // console.log('B) ARRAY MAP, TEST 5: REMOVE ALL')
+        operationStartTime = performance.now()
+        this.setState({
+            divElementsMap: 0
+        })
     }
 
     render() {
         return (
             <div className="Benchmark">
-                <p>In component</p>
-                <button onClick={() => this.addDivMap()}>0 MAP</button>
-                <button onClick={() => this.addDiv()}>1 addDiv</button>
-                <button onClick={() => this.editOneDiv()}>2 editDiv</button>
-                <button onClick={() => this.removeAllDiv()}>5 removeAllDiv</button>
+                <p>A) For loop</p>
+                <button onClick={() => this.addDiv()}>1 Add</button>
+                <button onClick={() => this.editOneDiv()}>2 Edit One</button>
+                <button onClick={() => this.editAllDiv()}>3 Edit All</button>
+                <button onClick={() => this.removeOneDiv()}>4 Remove One</button>
+                <button onClick={() => this.removeAllDiv()}>5 Remove all</button>
 
-                <p>BenchmarkContainer</p>
-                <button onClick={this.addDivsBenchmarkContainer}>1 add BC</button>
-                <button onClick={this.removeDivBenchmarkCOntainer}>5 remove BC</button>
+                <p>B) Array map</p>
+                <button onClick={() => this.addMap()}>1 Add</button>
+                <button onClick={() => this.editOneMap()}>2 Edit one</button>
+                <button onClick={() => this.editAllMap()}>3 Edit all</button>
+                <button onClick={() => this.removeOneMap()}>4 Remove one</button>
+                <button onClick={() => this.removeAllMap()}>5 Remove all</button>
 
                 <div>
-                    {this.state.items}
+                    {this.state.done}
                 </div>
-                <div>{this.state.ingredients.map((abc, i) =>
-                    <p key={abc}>Div {abc}</p>
-                )}
-                </div>
+
                 <div>
-                    <BenchmarkContainer
-                        testSelection={this.state.selectedTest}
-                    />
+                    {this.state.divElementsForLoop}
+                </div>
+                
+                <div
+                    id="divElementsMap">
+                    {
+                        [...Array(this.state.divElementsMap)].map(
+                            (e, i) =>
+                                <div
+                                    id={i}
+                                    key={i}
+                                    ref={this.myRef}
+                                >
+                                    <p>Div {i}
+                                    </p>
+                                </div>
+                        )
+                    }
+
                 </div>
             </div>
         );
