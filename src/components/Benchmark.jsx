@@ -60,8 +60,7 @@ class Benchmark extends Component {
     removeOneDiv() {
         console.log('A) FOR LOOP, TEST 4: REMOVE ONE DIV')
         operationStartTime = performance.now()
-        let newArray = this.state.divElementsForLoop.filter(x => x.key != this.state.divElementsForLoop.length-1);
-        // console.log(newArray)
+        let newArray = this.state.divElementsForLoop.filter(x => x.key !== this.state.divElementsForLoop.length-1);
         this.setState({
             divElementsForLoop: newArray
         })
@@ -107,9 +106,11 @@ class Benchmark extends Component {
 
     // 4
     removeOneMap() {
-        // console.log(this.myRef)
-        // var node = this.myRef
-        // node.splice()
+        operationStartTime = performance.now()
+        let asd = this.state.divElementsMap
+        this.setState({
+            divElementsMap: asd - 1
+        })
     }
 
     // 5
