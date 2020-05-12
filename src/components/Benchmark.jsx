@@ -22,75 +22,6 @@ class Benchmark extends Component {
         console.log('Operation took ' + (operationEndTime - operationStartTime) + ' milliseconds')
     }
 
-    // A) DATA STRUCTURE: FOR LOOP
-
-    // 1 
-    addDiv() {
-        operationStartTime = performance.now()
-        let temporaryArray = []
-        for (var i = 0; i < 10000; i ++) {
-        temporaryArray.push(
-            <div
-                key={i}
-            >
-                <p>
-                    Div {i}
-                </p>
-            </div>
-            )
-        }
-        this.setState({
-            divElementsForLoop: temporaryArray
-        })
-    }
-
-    // 2 
-    editOneDiv() {
-        operationStartTime = performance.now()
-        let newArray = this.state.divElementsForLoop;
-        newArray[0] = Math.random()
-        this.setState({
-            divElementsForLoop: newArray
-        })
-    }
-
-    // 3
-    editAllDiv() {
-        operationStartTime = performance.now()
-        let editTemporaryArray = []
-        for (var i = 0; i < this.state.divElementsForLoop.length; i ++) {
-        editTemporaryArray.push(
-            <div
-                key={i}
-            >
-                <p>
-                    DivEdit { Math.random() }
-                </p>
-            </div>
-            )
-        }
-        this.setState({
-            divElementsForLoop: editTemporaryArray
-        })
-    }
-
-    // 4
-    removeOneDiv() {
-        operationStartTime = performance.now()
-        let newArray = this.state.divElementsForLoop.filter(x => x.key !== this.state.divElementsForLoop.length-1);
-        this.setState({
-            divElementsForLoop: newArray
-        })
-    }
-
-    // 5
-    removeAllDiv() {
-        this.setState({
-            divElementsForLoop: []
-        })
-        operationStartTime = performance.now()
-    }
-
     // B) DATA STRUCTURE: ARRAY MAP
 
     // 1
@@ -183,5 +114,76 @@ class Benchmark extends Component {
         );
     }
 }
+
+    // A) DATA STRUCTURE: FOR LOOP
+
+    // 1 
+
+    /*
+    addDiv() {
+        operationStartTime = performance.now()
+        let temporaryArray = []
+        for (var i = 0; i < 10000; i ++) {
+        temporaryArray.push(
+            <div
+                key={i}
+            >
+                <p>
+                    Div {i}
+                </p>
+            </div>
+            )
+        }
+        this.setState({
+            divElementsForLoop: temporaryArray
+        })
+    }
+
+    // 2 
+    editOneDiv() {
+        operationStartTime = performance.now()
+        let newArray = this.state.divElementsForLoop;
+        newArray[0] = Math.random()
+        this.setState({
+            divElementsForLoop: newArray
+        })
+    }
+
+    // 3
+    editAllDiv() {
+        operationStartTime = performance.now()
+        let editTemporaryArray = []
+        for (var i = 0; i < this.state.divElementsForLoop.length; i ++) {
+        editTemporaryArray.push(
+            <div
+                key={i}
+            >
+                <p>
+                    DivEdit { Math.random() }
+                </p>
+            </div>
+            )
+        }
+        this.setState({
+            divElementsForLoop: editTemporaryArray
+        })
+    }
+
+    // 4
+    removeOneDiv() {
+        operationStartTime = performance.now()
+        let newArray = this.state.divElementsForLoop.filter(x => x.key !== this.state.divElementsForLoop.length-1);
+        this.setState({
+            divElementsForLoop: newArray
+        })
+    }
+
+    // 5
+    removeAllDiv() {
+        this.setState({
+            divElementsForLoop: []
+        })
+        operationStartTime = performance.now()
+    } */
 
 export default Benchmark;
