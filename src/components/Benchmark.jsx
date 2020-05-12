@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import '../App.css';
-
 
 let operationStartTime = null
 let operationEndTime = null
